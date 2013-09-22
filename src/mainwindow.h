@@ -14,7 +14,6 @@
 #include "QEvent"
 #include "QThread"
 #include "QBrush"
-#include "about.h"
 #include "QMessageBox"
 
 namespace Ui {
@@ -37,6 +36,7 @@ private:
 
     struct station
     {
+        int id;
         QString name;
         QString URL;
         QString img;
@@ -49,23 +49,20 @@ private:
     Phonon::AudioOutput audioOutput;
     QVector<station> stations;
     QSystemTrayIcon *trayicon;
-    QAction * action; //Закрыть
+    QAction * actionClose; //Закрыть
     QAction * actionAbout;
 
 
-    QThread * audioThread;
 
-
+    void configButton(station * st);
     void LoadStations();
-    void AddButtons();
     void Play(station st);
     void Stop();
     void SetIcon(bool paly);
-
     void changeEvent( QEvent * e );
 
 private  slots:
-  void RadioChenget();
+  void RadioButtonClicked(bool isChecked);
   void showHide(QSystemTrayIcon::ActivationReason);
   void showAbout();
   void mediaObjactStateChanget(Phonon::State oldst,
