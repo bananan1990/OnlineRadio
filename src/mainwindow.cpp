@@ -8,18 +8,16 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
 
     //Настройки вида основного окна
-    this->setWindowFlags(Qt::Window
-       | Qt::WindowMinimizeButtonHint
-       | Qt::WindowCloseButtonHint
-       | Qt::CustomizeWindowHint);
+    this->setWindowFlags(Qt::FramelessWindowHint);
 
     this->setAttribute(Qt::WA_TranslucentBackground);
-    this->setStyleSheet("background-image: url(:/img/back.png);");
+    //    this->setStyleSheet("background-image: url(:/img/back.png);");
     this->setWindowTitle("OnlineRadio.uz");
+    this->setBackground();
 
     //Кнопки станций
-    ui->gridLayout->setColumnStretch(3,100);
 
+    //    ui->gridLayout->setColumnStretch(3,100);
     //Статусбар
     ui->statusBar->showMessage(
                 "OnlineRadio.uz                  GPL-license");
@@ -33,33 +31,33 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->playButton->setIcon(QIcon(":/img/play.png"));
 
     //Phonon
-     Phonon::createPath(&mediaObject,&audioOutput);
+    Phonon::createPath(&mediaObject,&audioOutput);
     ui->volumeSlider->setAudioOutput(&audioOutput);
     connect(&mediaObject,SIGNAL(stateChanged(Phonon::State,Phonon::State)),
             this,SLOT(mediaObjactStateChanget(Phonon::State,Phonon:: State)));
 
 
     //trayicon
-     trayicon = new QSystemTrayIcon(this);
-     SetIcon(false);
-     connect(trayicon,
-             SIGNAL(activated(QSystemTrayIcon::ActivationReason)),
-             this,SLOT(showHide(QSystemTrayIcon::ActivationReason)));
+    trayicon = new QSystemTrayIcon(this);
+    SetIcon(false);
+    connect(trayicon,
+            SIGNAL(activated(QSystemTrayIcon::ActivationReason)),
+            this,SLOT(showHide(QSystemTrayIcon::ActivationReason)));
 
 
-     QMenu *Menu = new QMenu(this);
-     actionClose = new QAction(QString::fromLocal8Bit("Закрыть"),this);
-     actionAbout = new QAction(QString::fromLocal8Bit("О программе"), this);
-     Menu->addAction(actionClose);
-     Menu->addAction(actionAbout);
-     trayicon->setContextMenu(Menu);
+    QMenu *Menu = new QMenu(this);
+    actionClose = new QAction(QString::fromLocal8Bit("Закрыть"),this);
+    actionAbout = new QAction(QString::fromLocal8Bit("О программе"), this);
+    Menu->addAction(actionClose);
+    Menu->addAction(actionAbout);
+    trayicon->setContextMenu(Menu);
 
-     connect(actionClose,SIGNAL(triggered()),this,SLOT(close()));
-     connect (actionAbout,SIGNAL(triggered()),this,SLOT(showAbout()));
+    connect(actionClose,SIGNAL(triggered()),this,SLOT(close()));
+    connect (actionAbout,SIGNAL(triggered()),this,SLOT(showAbout()));
 
 
 
-     LoadStations();
+    LoadStations();
 
 
 }
@@ -79,7 +77,7 @@ void MainWindow::showAbout()
 {
     QMessageBox::about(this,QString::fromLocal8Bit("О программе"),
                        QString::fromLocal8Bit(
-                           "Добро пожаловать.\n\
+"Добро пожаловать.\n\
 П.О. Распространяется по лицензии GPL v.3 \n\
 git: git@github.com:bananan1990/OnlineRadio.git"));
 
@@ -89,7 +87,7 @@ void MainWindow::changeEvent(QEvent * e)
 {
     if ( e->type() == QEvent::WindowStateChange )
         if ( windowState() & Qt::WindowMinimized)
-        hide();
+            hide();
 }
 
 
@@ -126,6 +124,7 @@ void MainWindow::LoadStations()
 
         stations.append(st);
     }
+    resizeWindow();
 
 }
 
@@ -144,7 +143,17 @@ void MainWindow::configButton(station * st)
     st->btn->setCheckable(true);
     st->btn->setProperty("ID",st->id);
     connect(st->btn,SIGNAL(clicked(bool)),this,SLOT(RadioButtonClicked(bool)));
-    ui->gridLayout->addWidget(st->btn);
+
+    int xn = ((st->id + 1) % 4);
+    if (xn == 0)
+        xn = 4;
+
+
+    st->btn->setGeometry(6 * xn + 100 * xn - 100, 140 + 106 * (st->id/4),
+                         st->btn->width(), st->btn->height());
+
+    qDebug() << st->id << xn;
+
 }
 
 
@@ -218,9 +227,9 @@ void MainWindow::SetIcon(bool play)
 
 
     if (play)
-        trayicon->setIcon(QIcon(":/img/play.png"));  //устанавливаем иконку
+        trayicon->setIcon(QIcon(":/img/play.png"));
     else
-        trayicon->setIcon(QIcon(":/img/stop.png"));  //устанавливаем иконку
+        trayicon->setIcon(QIcon(":/img/stop.png"));
 
     trayicon->show();  //отображаем объект
 }
@@ -235,8 +244,44 @@ void MainWindow::showHide(QSystemTrayIcon::ActivationReason r)
             this->hide();
     }
 }
+void MainWindow::resizeWindow()
+{
+    station last = stations.last();
+    qDebug() << "last ID" << last.id << last.btn->geometry().y();
+    this->setFixedHeight(last.btn->geometry().y() + last.btn->height()+ 25);
+
+    setBackground();
+}
+void MainWindow::setBackground()
+{
+
+
+
+
+    //backGroundLabelHead
+    ui->backgroundLabelHead->setGeometry(QRect(0,0,430,130));
+    //-------------------
+
+    //backGroundLabelBody
+    ui->backgroundLabelBody->setGeometry(QRect(0,130,
+                                               430,height()-260));
+
+    //-------------------
+
+
+    //backGroundLabelFooter
+    ui->backgroundLableFooter->setGeometry(QRect(0,
+                                                 height() - 130,
+                                                 430,130));
+    //---------------------
+}
 
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+
+void MainWindow::on_CloseButton_clicked()
+{
+    emit close();
 }

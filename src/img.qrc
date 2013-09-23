@@ -3,5 +3,6 @@
         <file>img/back.png</file>
         <file>img/play.png</file>
         <file>img/stop.png</file>
+        <file>img/close.png</file>
     </qresource>
 </RCC>

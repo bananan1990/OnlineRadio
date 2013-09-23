@@ -60,16 +60,20 @@ private:
     void Stop();
     void SetIcon(bool paly);
     void changeEvent( QEvent * e );
+    void setBackground();
+    void resizeWindow();
+
 
 private  slots:
-  void RadioButtonClicked(bool isChecked);
   void showHide(QSystemTrayIcon::ActivationReason);
-  void showAbout();
+  void RadioButtonClicked(bool isChecked);
   void mediaObjactStateChanget(Phonon::State oldst,
                                Phonon:: State newst);
-
-
   void on_playButton_clicked(bool checked);
+
+
+  void showAbout();
+  void on_CloseButton_clicked();
 };
 
 #endif // MAINWINDOW_H

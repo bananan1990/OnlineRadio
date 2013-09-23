@@ -17,8 +17,7 @@ SOURCES += main.cpp\
 
 HEADERS  += mainwindow.h
 
-FORMS    += mainwindow.ui \
-    about.ui
+FORMS    += mainwindow.ui
 
 RESOURCES += \
     img.qrc
