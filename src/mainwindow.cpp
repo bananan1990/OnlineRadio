@@ -17,7 +17,6 @@ MainWindow::MainWindow(QWidget *parent) :
 
     //Кнопки станций
 
-    //    ui->gridLayout->setColumnStretch(3,100);
     //Статусбар
     ui->statusBar->showMessage(
                 "OnlineRadio.uz                  GPL-license");
@@ -57,7 +56,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
 
 
-    LoadStations();
+     LoadStations();
 
 
 }
@@ -124,7 +123,9 @@ void MainWindow::LoadStations()
 
         stations.append(st);
     }
-    resizeWindow();
+
+        if (!stations.isEmpty())
+                   resizeWindow();
 
 }
 
