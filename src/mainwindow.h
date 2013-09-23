@@ -74,6 +74,8 @@ private  slots:
 
   void showAbout();
   void on_CloseButton_clicked();
+  void on_playButton_pressed();
+  void on_playButton_released();
 };
 
 #endif // MAINWINDOW_H

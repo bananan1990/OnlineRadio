@@ -27,7 +27,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->playButton->setMinimumSize(QSize(100,100));
     ui->playingNow->setMaximumSize(QSize(100,100));
     ui->playingNow->setMinimumSize(QSize(100,100));
-    ui->playButton->setIcon(QIcon(":/img/play.png"));
+   // ui->playButton->setIcon(QIcon(":/img/play.png"));
 
     //Phonon
     Phonon::createPath(&mediaObject,&audioOutput);
@@ -182,7 +182,7 @@ void MainWindow::Play(station st)
     mediaObject.setCurrentSource(Phonon::MediaSource(st.URL));
     mediaObject.play();
 
-    ui->playButton->setIcon(QIcon(":/img/stop.png"));
+    //ui->playButton->setIcon(QIcon(":/img/stop.png"));
     ui->playButton->setChecked(true);
 
     QPixmap pix(st.img);
@@ -194,7 +194,7 @@ void MainWindow::Stop()
 {
     setWindowTitle("OnlineRadio");
     mediaObject.stop();
-    ui->playButton->setIcon(QIcon(":/img/play.png"));
+    //ui->playButton->setIcon(QIcon(":/img/play.png"));
     ui->playButton->setChecked(false);
     SetIcon(false);
 }
@@ -260,21 +260,21 @@ void MainWindow::setBackground()
 
 
     //backGroundLabelHead
-    ui->backgroundLabelHead->setGeometry(QRect(0,0,430,130));
+//    ui->backgroundLabelHead->setGeometry(QRect(0,0,430,130));
     //-------------------
 
     //backGroundLabelBody
-    ui->backgroundLabelBody->setGeometry(QRect(0,130,
-                                               430,height()-260));
+    ui->backgroundLabelBody->setGeometry(QRect(0,0,
+                                               430,height()));//-260));
 
     //-------------------
 
 
     //backGroundLabelFooter
-    ui->backgroundLableFooter->setGeometry(QRect(0,
-                                                 height() - 130,
-                                                 430,130));
-    //---------------------
+//    ui->backgroundLableFooter->setGeometry(QRect(0,
+//                                                 height() - 130,
+//                                                 430,130));
+//    //---------------------
 }
 
 MainWindow::~MainWindow()
@@ -285,4 +285,14 @@ MainWindow::~MainWindow()
 void MainWindow::on_CloseButton_clicked()
 {
     emit close();
+}
+
+void MainWindow::on_playButton_pressed()
+{
+    ui->playButton->setStyleSheet("border-image: url(:/img/play_blue2.png);");
+}
+
+void MainWindow::on_playButton_released()
+{
+    ui->playButton->setStyleSheet("border-image: url(:/img/play_blue.png);");
 }

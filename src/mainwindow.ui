@@ -32,7 +32,7 @@
    <bool>false</bool>
   </property>
   <property name="styleSheet">
-   <string notr="true">border-image: url(:/img/img/play.png);</string>
+   <string notr="true"/>
   </property>
   <property name="toolButtonStyle">
    <enum>Qt::ToolButtonTextOnly</enum>
@@ -53,127 +53,6 @@
      <height>16777215</height>
     </size>
    </property>
-   <widget class="QGroupBox" name="groupBox">
-    <property name="geometry">
-     <rect>
-      <x>0</x>
-      <y>0</y>
-      <width>430</width>
-      <height>130</height>
-     </rect>
-    </property>
-    <property name="minimumSize">
-     <size>
-      <width>430</width>
-      <height>130</height>
-     </size>
-    </property>
-    <property name="maximumSize">
-     <size>
-      <width>430</width>
-      <height>130</height>
-     </size>
-    </property>
-    <property name="title">
-     <string>Сейчас играет:</string>
-    </property>
-    <widget class="QLabel" name="playingNow">
-     <property name="geometry">
-      <rect>
-       <x>175</x>
-       <y>20</y>
-       <width>100</width>
-       <height>100</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string/>
-     </property>
-    </widget>
-    <widget class="Phonon::VolumeSlider" name="volumeSlider">
-     <property name="geometry">
-      <rect>
-       <x>290</x>
-       <y>10</y>
-       <width>110</width>
-       <height>100</height>
-      </rect>
-     </property>
-     <property name="orientation">
-      <enum>Qt::Vertical</enum>
-     </property>
-     <property name="pageStep">
-      <number>50</number>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="playButton">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>20</y>
-       <width>100</width>
-       <height>100</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string/>
-     </property>
-     <property name="checkable">
-      <bool>true</bool>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="CloseButton">
-     <property name="geometry">
-      <rect>
-       <x>400</x>
-       <y>0</y>
-       <width>31</width>
-       <height>31</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string/>
-     </property>
-     <property name="icon">
-      <iconset resource="img.qrc">
-       <normaloff>:/img/close.png</normaloff>:/img/close.png</iconset>
-     </property>
-     <property name="iconSize">
-      <size>
-       <width>23</width>
-       <height>23</height>
-      </size>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="CloseButton_2">
-     <property name="geometry">
-      <rect>
-       <x>370</x>
-       <y>0</y>
-       <width>31</width>
-       <height>31</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string/>
-     </property>
-     <property name="icon">
-      <iconset resource="img.qrc">
-       <normaloff>:/img/close.png</normaloff>:/img/close.png</iconset>
-     </property>
-     <property name="iconSize">
-      <size>
-       <width>23</width>
-       <height>23</height>
-      </size>
-     </property>
-    </widget>
-    <zorder>playingNow</zorder>
-    <zorder>playButton</zorder>
-    <zorder>volumeSlider</zorder>
-    <zorder>CloseButton</zorder>
-    <zorder>CloseButton_2</zorder>
-   </widget>
    <widget class="QLabel" name="backgroundLabelHead">
     <property name="geometry">
      <rect>
@@ -184,7 +63,7 @@
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-color: rgb(228, 237, 228,220);</string>
+     <string notr="true"/>
     </property>
     <property name="text">
      <string/>
@@ -200,32 +79,117 @@
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgba(0, 0, 0, 0), stop:1 rgba(228, 237, 228,220));</string>
+     <string notr="true"/>
     </property>
     <property name="text">
      <string/>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="playButton">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>20</y>
+      <width>100</width>
+      <height>100</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border-image: url(:/img/play_blue.png);</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="checkable">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="CloseButton">
+    <property name="geometry">
+     <rect>
+      <x>370</x>
+      <y>180</y>
+      <width>31</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="icon">
+     <iconset resource="img.qrc">
+      <normaloff>:/img/close.png</normaloff>:/img/close.png</iconset>
+    </property>
+    <property name="iconSize">
+     <size>
+      <width>23</width>
+      <height>23</height>
+     </size>
+    </property>
+   </widget>
+   <widget class="Phonon::VolumeSlider" name="volumeSlider">
+    <property name="geometry">
+     <rect>
+      <x>100</x>
+      <y>300</y>
+      <width>110</width>
+      <height>100</height>
+     </rect>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Vertical</enum>
+    </property>
+    <property name="pageStep">
+     <number>50</number>
+    </property>
+   </widget>
+   <widget class="QDial" name="dial">
+    <property name="geometry">
+     <rect>
+      <x>310</x>
+      <y>20</y>
+      <width>100</width>
+      <height>100</height>
+     </rect>
     </property>
    </widget>
    <widget class="QLabel" name="backgroundLabelBody">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>140</y>
+      <x>60</x>
+      <y>330</y>
       <width>271</width>
       <height>241</height>
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgba(228, 237, 228,220), stop:1 rgba(255, 255, 255, 0));</string>
+     <string notr="true">border-image: url(:/img/body.png);</string>
     </property>
     <property name="text">
      <string/>
     </property>
    </widget>
-   <zorder>backgroundLabelHead</zorder>
-   <zorder>groupBox</zorder>
-   <zorder>backgroundLableFooter</zorder>
+   <widget class="QLabel" name="playingNow">
+    <property name="geometry">
+     <rect>
+      <x>170</x>
+      <y>20</y>
+      <width>100</width>
+      <height>100</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>pp</string>
+    </property>
+   </widget>
    <zorder>backgroundLabelBody</zorder>
+   <zorder>backgroundLabelHead</zorder>
+   <zorder>backgroundLableFooter</zorder>
+   <zorder>playButton</zorder>
+   <zorder>CloseButton</zorder>
+   <zorder>volumeSlider</zorder>
+   <zorder>dial</zorder>
+   <zorder>playingNow</zorder>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
